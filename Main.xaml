@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="567.333333333333,1666" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ea="clr-namespace:ExcelActivities.Activities;assembly=ExcelActivities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="664,4577.33333333333" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ea="clr-namespace:ExcelActivities.Activities;assembly=ExcelActivities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="24">
       <x:String>System.Activities</x:String>
@@ -28,7 +28,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="36">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="19">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -50,11 +50,15 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="534.666666666667,1501.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap:VirtualizedContainerService.HintSize="534.666666666667,4412.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="selectQuery" />
       <Variable x:TypeArguments="ui:DatabaseConnection" Name="AccConn" />
       <Variable x:TypeArguments="sd:DataTable" Name="TblOutput" />
+      <Variable x:TypeArguments="ui:WorkbookApplication" Name="excel" />
+      <Variable x:TypeArguments="x:String" Name="secondQuery" />
+      <Variable x:TypeArguments="ui:DatabaseConnection" Name="SecondAccConn" />
+      <Variable x:TypeArguments="sd:DataTable" Name="secondTblOutput" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -62,6 +66,7 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:DatabaseConnect DatabaseConnection="[AccConn]" DisplayName="Connect" sap:VirtualizedContainerService.HintSize="492.666666666667,58.6666666666667" sap2010:WorkflowViewState.IdRef="DatabaseConnect_1" ProviderName="System.Data.OleDb" ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\RPA\Uipath.mdb;Jet OLEDB:Database Password=MyP@ssworD" />
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="492.666666666667,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="Connection is established between Access and UiPath" />
     <Assign sap:VirtualizedContainerService.HintSize="492.666666666667,62" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[selectQuery]</OutArgument>
@@ -76,14 +81,48 @@
       </ui:ExecuteQuery.Parameters>
     </ui:ExecuteQuery>
     <ui:DatabaseDisconnect DatabaseConnection="[AccConn]" DisplayName="Disconnect" sap:VirtualizedContainerService.HintSize="492.666666666667,22" sap2010:WorkflowViewState.IdRef="DatabaseDisconnect_1" />
-    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="492.666666666667,58.6666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[TblOutput.Rows.Count.ToString]" />
-    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="492.666666666667,920.666666666667" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="C:\RPA\ProductsDetails.xls">
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="492.666666666667,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[TblOutput.Rows.Count.ToString+&quot; &quot;+&quot;Rows are selected from MS Access&quot;]" />
+    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel application scope" sap:VirtualizedContainerService.HintSize="492.666666666667,390" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_4" WorkbookPath="C:\RPA\ProductsDetails.xls">
       <ui:ExcelApplicationScope.Body>
         <ActivityAction x:TypeArguments="ui:WorkbookApplication">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="458.666666666667,812" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,281.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_7">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ExcelWriteRange AddHeaders="True" DataTable="[TblOutput]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_2" SheetName="Sheet5" StartingCell="A1" />
+            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_8" Text="Copied the ProductDetails table data in Excel." />
+          </Sequence>
+        </ActivityAction>
+      </ui:ExcelApplicationScope.Body>
+    </ui:ExcelApplicationScope>
+    <ui:DatabaseConnect DatabaseConnection="[SecondAccConn]" DisplayName="Connect" sap:VirtualizedContainerService.HintSize="492.666666666667,58.6666666666667" sap2010:WorkflowViewState.IdRef="DatabaseConnect_4" ProviderName="System.Data.OleDb" ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\RPA\Uipath.mdb;Jet OLEDB:Database Password=MyP@ssworD" />
+    <Assign sap:VirtualizedContainerService.HintSize="492.666666666667,62" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[secondQuery]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">["Select * from ProductsData"]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:ExecuteQuery ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[secondTblOutput]" DisplayName="Execute Query" ExistingDbConnection="[SecondAccConn]" sap:VirtualizedContainerService.HintSize="492.666666666667,87.3333333333333" sap2010:WorkflowViewState.IdRef="ExecuteQuery_2" Sql="[secondQuery]">
+      <ui:ExecuteQuery.Parameters>
+        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+      </ui:ExecuteQuery.Parameters>
+    </ui:ExecuteQuery>
+    <ui:DatabaseDisconnect DatabaseConnection="[SecondAccConn]" DisplayName="Disconnect" sap:VirtualizedContainerService.HintSize="492.666666666667,22" sap2010:WorkflowViewState.IdRef="DatabaseDisconnect_4" />
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="492.666666666667,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_7" Text="[secondTblOutput.Rows.Count.ToString+&quot; &quot;+&quot;Rows are selected from second table using MS Access&quot;]" />
+    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="492.666666666667,1880" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" Workbook="[excel]" WorkbookPath="C:\RPA\ProductsDetails.xls">
+      <ui:ExcelApplicationScope.Body>
+        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="458.666666666667,1771.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <Sequence.Variables>
               <Variable x:TypeArguments="sd:DataTable" Name="ExclData" />
               <Variable x:TypeArguments="ui:DatabaseConnection" Name="SQLConnection" />
@@ -93,18 +132,209 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ExcelWriteRange AddHeaders="True" DataTable="[TblOutput]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="416.666666666667,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_1" SheetName="Sheet4" StartingCell="A1" />
-            <ea:CreatePivotTable InputDataTable="{x:Null}" OutputDatatable="{x:Null}" StrInput11="{x:Null}" StrInput12="{x:Null}" StrInput13="{x:Null}" StrInput14="{x:Null}" StrInput15="{x:Null}" StrInput16="{x:Null}" StrInput17="{x:Null}" StrInput18="{x:Null}" StrInput19="{x:Null}" StrInput20="{x:Null}" StrInput21="{x:Null}" StrInput22="{x:Null}" StrInput23="{x:Null}" StrInput24="{x:Null}" StrInput25="{x:Null}" StrInput26="{x:Null}" StrInput27="{x:Null}" StrInput28="{x:Null}" StrInput29="{x:Null}" StrInput30="{x:Null}" StrInput31="{x:Null}" StrInput32="{x:Null}" StrInput33="{x:Null}" StrInput34="{x:Null}" StrInput35="{x:Null}" StrInput36="{x:Null}" StrInput37="{x:Null}" StrInput38="{x:Null}" StrInput39="{x:Null}" StrInput40="{x:Null}" StrInput41="{x:Null}" StrInput42="{x:Null}" StrInput43="{x:Null}" StrInput44="{x:Null}" StrInput45="{x:Null}" DisplayName="Create pivot table" sap:VirtualizedContainerService.HintSize="416.666666666667,179.333333333333" sap2010:WorkflowViewState.IdRef="CreatePivotTable_1" InputFilters="1,0;1,0;1,0;2,0;2,0;2,0;3,1;3,1;4,0;4,0;4,0" InputSheetName="Sheet4" OutputAsValues="False" OutputSheetName="Pivot" RepeatLabels="False" ShowSubTotal="False" StrInput0="Country" StrInput1="RetailerGroup" StrInput10="Family" StrInput2="RetailerName" StrInput3="FiscalYear" StrInput4="FiscalQuarter" StrInput5="FiscalMonth" StrInput6="Units" StrInput7="ASP_USD" StrInput8="SubFormFactor" StrInput9="FormFactor" />
-            <ui:ExcelReadRange AddHeaders="True" DataTable="[ExclData]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="416.666666666667,58.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelReadRange_1" SheetName="Sheet4">
+            <ui:ExcelAppendRange DataTable="[secondTblOutput]" DisplayName="Append Range" sap:VirtualizedContainerService.HintSize="416.666666666667,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelAppendRange_1" SheetName="Sheet5" />
+            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="416.666666666667,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_9" Text="Append the ProductsData table data in same Excel." />
+            <ea:CreatePivotTable InputDataTable="{x:Null}" OutputDatatable="{x:Null}" StrInput11="{x:Null}" StrInput12="{x:Null}" StrInput13="{x:Null}" StrInput14="{x:Null}" StrInput15="{x:Null}" StrInput16="{x:Null}" StrInput17="{x:Null}" StrInput18="{x:Null}" StrInput19="{x:Null}" StrInput20="{x:Null}" StrInput21="{x:Null}" StrInput22="{x:Null}" StrInput23="{x:Null}" StrInput24="{x:Null}" StrInput25="{x:Null}" StrInput26="{x:Null}" StrInput27="{x:Null}" StrInput28="{x:Null}" StrInput29="{x:Null}" StrInput30="{x:Null}" StrInput31="{x:Null}" StrInput32="{x:Null}" StrInput33="{x:Null}" StrInput34="{x:Null}" StrInput35="{x:Null}" StrInput36="{x:Null}" StrInput37="{x:Null}" StrInput38="{x:Null}" StrInput39="{x:Null}" StrInput40="{x:Null}" StrInput41="{x:Null}" StrInput42="{x:Null}" StrInput43="{x:Null}" StrInput44="{x:Null}" StrInput45="{x:Null}" DisplayName="Create pivot table" sap:VirtualizedContainerService.HintSize="416.666666666667,179.333333333333" sap2010:WorkflowViewState.IdRef="CreatePivotTable_1" InputFilters="1,0;1,0;1,0;2,0;2,0;2,0;3,1;3,1;4,0;4,0;4,0" InputSheetName="Sheet5" OutputAsValues="False" OutputSheetName="Pivot" RepeatLabels="False" ShowSubTotal="False" StrInput0="Country" StrInput1="RetailerGroup" StrInput10="Family" StrInput2="RetailerName" StrInput3="FiscalYear" StrInput4="FiscalQuarter" StrInput5="FiscalMonth" StrInput6="Units" StrInput7="ASP_USD" StrInput8="SubFormFactor" StrInput9="FormFactor" />
+            <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Button  Sum of ASP(USD)'" sap:VirtualizedContainerService.HintSize="416.666666666667,106" sap2010:WorkflowViewState.IdRef="Click_23" KeyModifiers="None" MouseButton="BTN_LEFT">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="88d10acf-b966-4f37-b372-e44ef5299aa3" InformativeScreenshot="77d894093a368d6655f2e6311d14d068" Selector="&lt;wnd app='excel.exe' cls='XLMAIN' title='ProductsDetails  [Compatibility Mode] - Excel' /&gt;&lt;uia cls='MsoCommandBar' name='PivotTable Field List' /&gt;&lt;uia cls='NetUIDropZonesDropButton' name='Sum of ASP_USD' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:Click.Target>
+            </ui:Click>
+            <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'menu item'" sap:VirtualizedContainerService.HintSize="416.666666666667,106" sap2010:WorkflowViewState.IdRef="Click_24" KeyModifiers="None" MouseButton="BTN_LEFT">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="88d10acf-b966-4f37-b372-e44ef5299aa3" InformativeScreenshot="60fa8e7892a2f2847692074bd0cfe593" Selector="&lt;wnd app='excel.exe' cls='MsoCommandBarPopup' title='Temporary context menu' /&gt;&lt;ctrl name='Temporary context menu' role='popup menu' /&gt;&lt;ctrl name='Value Field Settings... ' role='menu item' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:Click.Target>
+            </ui:Click>
+            <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'push button'" sap:VirtualizedContainerService.HintSize="416.666666666667,106" sap2010:WorkflowViewState.IdRef="Click_25" KeyModifiers="None" MouseButton="BTN_LEFT">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="88d10acf-b966-4f37-b372-e44ef5299aa3" InformativeScreenshot="7b896ce3d9a66815ee08b570e35659ce" Selector="&lt;wnd app='excel.exe' cls='bosa_sdm_XL9' title='Value Field Settings' /&gt;&lt;ctrl name='Number Format' role='push button' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:Click.Target>
+            </ui:Click>
+            <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'list item  Currency'" sap:VirtualizedContainerService.HintSize="416.666666666667,106" sap2010:WorkflowViewState.IdRef="Click_26" KeyModifiers="None" MouseButton="BTN_LEFT">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="88d10acf-b966-4f37-b372-e44ef5299aa3" InformativeScreenshot="841834fe74d8759d417574a8f7472242" Selector="&lt;wnd app='excel.exe' cls='bosa_sdm_XL9' title='Format Cells' /&gt;&lt;ctrl name='Category:' role='list' /&gt;&lt;ctrl name='Currency' role='list item' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:Click.Target>
+            </ui:Click>
+            <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'push button  OK'" sap:VirtualizedContainerService.HintSize="416.666666666667,106" sap2010:WorkflowViewState.IdRef="Click_27" KeyModifiers="None" MouseButton="BTN_LEFT">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="81bf76b0-a8f2-4a82-9b11-9cc6d2b3e88f" InformativeScreenshot="5ba0d39aea65a4d5bfe0e3ee506aec44" Selector="&lt;wnd app='excel.exe' cls='bosa_sdm_XL9' title='Format Cells' /&gt;&lt;ctrl name='OK' role='push button' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:Click.Target>
+            </ui:Click>
+            <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'push button  OK'" sap:VirtualizedContainerService.HintSize="416.666666666667,106" sap2010:WorkflowViewState.IdRef="Click_28" KeyModifiers="None" MouseButton="BTN_LEFT">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="81bf76b0-a8f2-4a82-9b11-9cc6d2b3e88f" InformativeScreenshot="684f35a00aaeb7ee59e97ef0786c157e" Selector="&lt;wnd app='excel.exe' cls='bosa_sdm_XL9' title='Value Field Settings' /&gt;&lt;ctrl name='OK' role='push button' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:Click.Target>
+            </ui:Click>
+            <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Button  Save'" sap:VirtualizedContainerService.HintSize="416.666666666667,106" sap2010:WorkflowViewState.IdRef="Click_29" KeyModifiers="None" MouseButton="BTN_LEFT">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="81bf76b0-a8f2-4a82-9b11-9cc6d2b3e88f" InformativeScreenshot="75754967526406a9ded9b5a5f53efc05" Selector="&lt;wnd app='excel.exe' cls='XLMAIN' title='ProductsDetails  [Compatibility Mode] - Excel' /&gt;&lt;uia cls='MsoCommandBar' name='Ribbon' /&gt;&lt;uia cls='NetUIElement' name='Quick Access Toolbar' /&gt;&lt;uia cls='NetUIRibbonButton' name='Save' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:Click.Target>
+            </ui:Click>
+            <ui:CloseApplication DisplayName="Close Application 'Button  Close'" sap:VirtualizedContainerService.HintSize="416.666666666667,106" sap2010:WorkflowViewState.IdRef="CloseApplication_1">
+              <ui:CloseApplication.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="f92b320e-fb56-4fb5-95ce-eb2456d58753" InformativeScreenshot="a25a0aff2bd7e9d70ff3f9c0a4b4752a" Selector="&lt;wnd app='excel.exe' cls='XLMAIN' title='ProductsDetails  [Compatibility Mode] - Excel' /&gt;&lt;uia cls='MsoCommandBar' name='Ribbon' /&gt;&lt;uia cls='NetUIAppFrameHelper' name='Close' /&gt;">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:CloseApplication.Target>
+            </ui:CloseApplication>
+            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="416.666666666667,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_6" Text="Pivot is created from excel" />
+          </Sequence>
+        </ActivityAction>
+      </ui:ExcelApplicationScope.Body>
+    </ui:ExcelApplicationScope>
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="492.666666666667,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="Migrate excel data to SQL is in process" />
+    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel application scope" sap:VirtualizedContainerService.HintSize="492.666666666667,780" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_3" WorkbookPath="C:\RPA\ProductsDetails.xls">
+      <ui:ExcelApplicationScope.Body>
+        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,671.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_6">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="sd:DataTable" Name="ExcelData" />
+              <Variable x:TypeArguments="ui:DatabaseConnection" Name="ConnectionSQL" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ExcelReadRange AddHeaders="True" DataTable="[ExcelData]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="334,58.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelReadRange_2" SheetName="Sheet5">
               <ui:ExcelReadRange.Range>
                 <InArgument x:TypeArguments="x:String">
                   <Literal x:TypeArguments="x:String" Value="" />
                 </InArgument>
               </ui:ExcelReadRange.Range>
             </ui:ExcelReadRange>
-            <ui:DatabaseConnect DatabaseConnection="[SQLConnection]" DisplayName="Connect" sap:VirtualizedContainerService.HintSize="416.666666666667,58.6666666666667" sap2010:WorkflowViewState.IdRef="DatabaseConnect_2" ProviderName="System.Data.SqlClient" ConnectionString="Data Source=LP-5CG0275X5B\SQLEXPRESS;Initial Catalog=RPAPOC;Integrated Security=True" />
-            <ui:InsertDataTable AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" DataTable="[ExclData]" DisplayName="Insert" ExistingDbConnection="[SQLConnection]" sap:VirtualizedContainerService.HintSize="416.666666666667,114.666666666667" sap2010:WorkflowViewState.IdRef="InsertDataTable_1" TableName="ProductDetails" />
-            <ui:DatabaseDisconnect DatabaseConnection="[SQLConnection]" DisplayName="Disconnect" sap:VirtualizedContainerService.HintSize="416.666666666667,22" sap2010:WorkflowViewState.IdRef="DatabaseDisconnect_2" />
+            <ui:DatabaseConnect DatabaseConnection="[ConnectionSQL]" DisplayName="Connect" sap:VirtualizedContainerService.HintSize="334,58.6666666666667" sap2010:WorkflowViewState.IdRef="DatabaseConnect_3" ProviderName="System.Data.SqlClient" ConnectionString="Data Source=LP-5CG0275X5B\SQLEXPRESS;Initial Catalog=RPAPOC;Integrated Security=True" />
+            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_10" Text="The connection is established between UiPath and SQL" />
+            <ui:InsertDataTable AffectedRecords="{x:Null}" ContinueOnError="{x:Null}" DataTable="[ExcelData]" DisplayName="Insert" ExistingDbConnection="[ConnectionSQL]" sap:VirtualizedContainerService.HintSize="334,114.666666666667" sap2010:WorkflowViewState.IdRef="InsertDataTable_2" TableName="ProductDetails" />
+            <ui:DatabaseDisconnect DatabaseConnection="[ConnectionSQL]" DisplayName="Disconnect" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="DatabaseDisconnect_3" />
+            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="Excel to SQL data migration is completed." />
           </Sequence>
         </ActivityAction>
       </ui:ExcelApplicationScope.Body>

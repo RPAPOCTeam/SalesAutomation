@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="708.666666666667,4873.33333333333" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ea="clr-namespace:ExcelActivities.Activities;assembly=ExcelActivities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="708.666666666667,4893.33333333333" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ea="clr-namespace:ExcelActivities.Activities;assembly=ExcelActivities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="28">
       <x:String>System.Activities</x:String>
@@ -59,7 +59,7 @@
       <AssemblyReference>UiPath.CV</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="718.666666666667,4708.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap:VirtualizedContainerService.HintSize="718.666666666667,4728.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="selectQuery" />
       <Variable x:TypeArguments="ui:DatabaseConnection" Name="AccConn" />
@@ -99,7 +99,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="676.666666666667,58.6666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[&quot;Application Process execution is started.&quot;]" />
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="676.666666666667,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_29" Text="Application Process execution is started." />
     <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="676.666666666667,128" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
@@ -208,7 +208,7 @@
         <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="ListOfFiles.Length=0" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_1" />
       </ui:InterruptibleDoWhile.Condition>
     </ui:InterruptibleDoWhile>
-    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="676.666666666667,58.6666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_13" Text="[&quot;Selection of Database folder is done&quot;]" />
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="676.666666666667,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_30" Text="Start the process of moving data from MS Access to Excel. " />
     <ui:PathExists DisplayName="Path Exists" Exists="[CheckPathExists]" sap:VirtualizedContainerService.HintSize="676.666666666667,90.6666666666667" sap2010:WorkflowViewState.IdRef="PathExists_2" Path="[ExcelFilePath]" PathType="File" />
     <If Condition="[CheckPathExists]" sap:VirtualizedContainerService.HintSize="676.666666666667,268" sap2010:WorkflowViewState.IdRef="If_3">
       <If.Then>
@@ -314,25 +314,25 @@
         </ActivityAction>
       </ui:ForEach.Body>
     </ui:ForEach>
-    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="676.666666666667,58.6666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_15" Text="[&quot;Data is copied from MS Access to Excel then Pivot creation is started.&quot;]" />
-    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel application scope" sap:VirtualizedContainerService.HintSize="676.666666666667,478.666666666667" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_11" WorkbookPath="[ExcelFilePath]">
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="676.666666666667,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_31" Text="Data is copied from MS Access to Excel then Pivot creation is started." />
+    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel application scope" sap:VirtualizedContainerService.HintSize="676.666666666667,482.666666666667" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_11" WorkbookPath="[ExcelFilePath]">
       <ui:ExcelApplicationScope.Body>
         <ActivityAction x:TypeArguments="ui:WorkbookApplication">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="458.666666666667,370" sap2010:WorkflowViewState.IdRef="Sequence_172">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="458.666666666667,374" sap2010:WorkflowViewState.IdRef="Sequence_172">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <ea:CreatePivotTable InputDataTable="{x:Null}" OutputDatatable="{x:Null}" StrInput11="{x:Null}" StrInput12="{x:Null}" StrInput13="{x:Null}" StrInput14="{x:Null}" StrInput15="{x:Null}" StrInput16="{x:Null}" StrInput17="{x:Null}" StrInput18="{x:Null}" StrInput19="{x:Null}" StrInput20="{x:Null}" StrInput21="{x:Null}" StrInput22="{x:Null}" StrInput23="{x:Null}" StrInput24="{x:Null}" StrInput25="{x:Null}" StrInput26="{x:Null}" StrInput27="{x:Null}" StrInput28="{x:Null}" StrInput29="{x:Null}" StrInput30="{x:Null}" StrInput31="{x:Null}" StrInput32="{x:Null}" StrInput33="{x:Null}" StrInput34="{x:Null}" StrInput35="{x:Null}" StrInput36="{x:Null}" StrInput37="{x:Null}" StrInput38="{x:Null}" StrInput39="{x:Null}" StrInput40="{x:Null}" StrInput41="{x:Null}" StrInput42="{x:Null}" StrInput43="{x:Null}" StrInput44="{x:Null}" StrInput45="{x:Null}" DisplayName="Create pivot table" sap:VirtualizedContainerService.HintSize="416.666666666667,179.333333333333" sap2010:WorkflowViewState.IdRef="CreatePivotTable_4" InputFilters="1,0;1,0;1,0;2,0;2,0;2,0;3,1;3,1;4,0;4,0;4,0" InputSheetName="Sheet1" OutputAsValues="False" OutputSheetName="Pivot" RepeatLabels="False" ShowSubTotal="False" StrInput0="Country" StrInput1="RetailerGroup" StrInput10="Family" StrInput2="RetailerName" StrInput3="FiscalYear" StrInput4="FiscalQuarter" StrInput5="FiscalMonth" StrInput6="Units" StrInput7="ASP_USD" StrInput8="SubFormFactor" StrInput9="FormFactor" />
-            <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="416.666666666667,58.6666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_14" Text="[&quot;Pivot is created&quot;]" />
+            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="416.666666666667,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_32" Text="Pivot is created" />
           </Sequence>
         </ActivityAction>
       </ui:ExcelApplicationScope.Body>
     </ui:ExcelApplicationScope>
-    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="676.666666666667,58.6666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_12" Text="[&quot;Process is completed&quot;]" />
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="676.666666666667,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_33" Text="Process is completed" />
   </Sequence>
 </Activity>
